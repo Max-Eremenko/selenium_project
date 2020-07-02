@@ -11,10 +11,10 @@ class TestTable(unittest.TestCase):
         enter_text = self.driver.find_element_by_xpath('//input[@id="task-table-filter"]')
         enter_text.send_keys('bug fixing')
 
-        filter_text = self.driver.find_element_by_xpath('//tbody/tr[7]')
-        assert filter_text.is_displayed()
+        filter_table = self.driver.find_element_by_xpath('//table[@id="task-table"]')
+        assert filter_table.is_displayed()
 
-    def test_correct_numbers_row(self):
+    def test_correct_quantity_row(self):
         all_table = self.driver.find_elements_by_xpath('//table[@id="task-table"]//tbody/tr')
         assert len(all_table) == 7
 
