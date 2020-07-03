@@ -11,7 +11,7 @@ class TestTable(unittest.TestCase):
         enter_text = self.driver.find_element_by_xpath('//input[@id="task-table-filter"]')
         enter_text.send_keys('bug fixing')
 
-        filter_table = self.driver.find_element_by_xpath('//table[@id="task-table"]')
+        filter_table = self.driver.find_element_by_xpath('//table[@id="task-table"]//tr[7]')
         assert filter_table.is_displayed()
 
     def test_correct_quantity_row(self):
