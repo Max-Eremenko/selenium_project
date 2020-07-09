@@ -11,34 +11,30 @@ class TestTable(unittest.TestCase):
         self.driver = webdriver.Chrome(executable_path='D:\qa\chromedrive\chromedriver')
         self.url = self.driver.get('https://www.seleniumeasy.com/test/dynamic-data-loading-demo.html')
 
-    # def test_get_random_user_img(self):
-    #     button_get_new_user = self.driver.find_element_by_xpath('//button[@type="button"][@class="btn btn-default"]')
-    #     button_get_new_user.click()
-    #
-    #     wait_for_image = WebDriverWait(self.driver, 5).until(
-    #         EC.visibility_of_element_located((By.XPATH, '//div[@id="loading"]/img[@src]')))
-    #
-    #     img = self.driver.find_element_by_xpath('//div[@id="loading"]/img[@src]')
-    #     assert img.is_displayed()
-
-
-    def test_get_first_and_last_name(self):
+    def test_get_random_user_img(self):
         button_get_new_user = self.driver.find_element_by_xpath('//button[@type="button"][@class="btn btn-default"]')
         button_get_new_user.click()
 
-        # wait_for_names = WebDriverWait(self.driver, 5).until(
-        #     EC.visibility_of_all_elements_located((By.XPATH, '//div[@id="loading"]/text()')))
+        wait_for_image = WebDriverWait(self.driver, 5).until(
+            EC.visibility_of_element_located((By.XPATH, '//div[@id="loading"]/img[@src]')))
 
-        names = self.driver.find_elements_by_xpath('//div[@id="loading"]/br')
-        list = []
-        for i in names:
-            list.append(i)
-        assert names[0].is_displayed()
-        # assert names[1].text
-        print(type(names))
+        img = self.driver.find_element_by_xpath('//div[@id="loading"]/img[@src]')
+        assert img.is_displayed()
 
+    def test_get_first_name(self):
+        button_get_new_user = self.driver.find_element_by_xpath('//button[@type="button"][@class="btn btn-default"]')
+        button_get_new_user.click()
 
-# //*[text()[contains(.,"First")]]
+        first_name = self.driver.find_element_by_xpath('//*[text()[contains(.,"First")]]')
+        assert first_name.is_displayed()
+
+    def test_get_last_name(self):
+        button_get_new_user = self.driver.find_element_by_xpath('//button[@type="button"][@class="btn btn-default"]')
+        button_get_new_user.click()
+
+        last_name = self.driver.find_element_by_xpath('//*[text()[contains(.,"Last")]]')
+        assert last_name.is_displayed()
+
 
 
 
