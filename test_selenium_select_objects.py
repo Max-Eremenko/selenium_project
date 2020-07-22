@@ -114,4 +114,13 @@ class TestSelectDays(unittest.TestCase):
         result = self.driver.find_element_by_xpath('//p[@class="getall-selected"][contains(text(), "")]')
         assert result.is_displayed()
 
+    def tearDown(self):
+        self.driver.close()
+
+
+
+
+
+
+
 
