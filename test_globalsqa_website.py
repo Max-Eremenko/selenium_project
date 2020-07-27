@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.alert import Alert
+from selenium.common.exceptions import TimeoutException
 
 
 class TestingFeatures(unittest.TestCase):
@@ -104,20 +106,24 @@ class TestingFeatures(unittest.TestCase):
     #     click_on_dialog_box = self.driver.find_element_by_xpath('//li[@class="price_footer"]/a[@href="http://www.globalsqa.com/demo-site/dialog-boxes/"]')
     #     click_on_dialog_box.click()
     #
-    #     # wait_for = WebDriverWait(self.driver, 5).until(EC.new_window_is_opened((By.XPATH, '//button[@id="create-user"]')))
+    #     Alert.accept(self.driver.find_element_by_xpath((By.XPATH, '//div[@id="users-contain"]')))
+    #     # wait_for = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, '//div[@id="users-contain"]')))
     #
-    #     click_on_create_new_user = self.driver.find_element_by_xpath('//button[@id="create-user"]')
+    #     click_on_create_new_user = self.driver.find_element_by_xpath('//button[@id="create-user"][text()="Create new user"]')
     #     click_on_create_new_user.click()
     #
     #     wait_for = WebDriverWait(self.driver, 5).until(EC.new_window_is_opened((By.XPATH, '//div[@id="dialog-form"]')))
     #
     #     enter_name = self.driver.find_element_by_xpath('//input[@name="name"]')
+    #     enter_name.clear()
     #     enter_name.send_keys('John Smith')
     #
     #     enter_email = self.driver.find_element_by_xpath('//input[@name="email"]')
+    #     enter_email.clear()
     #     enter_email.send_keys('jsmith1991@yahoo.com')
     #
     #     enter_password = self.driver.find_element_by_xpath('//input[@name="password"]')
+    #     enter_password.clear()
     #     enter_password.send_keys('lovemycity111')
     #
     #     click_on_create_an_account = self.driver.find_element_by_xpath('//button[@type="button"][text()="Create an account"]')
@@ -125,6 +131,28 @@ class TestingFeatures(unittest.TestCase):
     #
     #     result_new_user = self.driver.find_element_by_xpath('//table[@id="users"]/tbody/tr[2]')
     #     assert result_new_user.is_displayed()
+
+    def test_message_box(self):
+        click_on_dialog_box = self.driver.find_element_by_xpath(
+            '//li[@class="price_footer"]/a[@href="http://www.globalsqa.com/demo-site/dialog-boxes/"]')
+        click_on_dialog_box.click()
+
+        wait_for = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//li[@id="Message Box"]')))
+
+        go_to_message_box = self.driver.find_element_by_xpath('//li[@id="Message Box"]')
+        go_to_message_box.click()
+
+        wait_for = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//button[@type="button"][text()="Ok"]')))
+
+        click_on_ok = self.driver.find_element_by_xpath('//button[@type="button"][text()="Ok"]')
+        click_on_ok.click()
+
+        click_on_rutrum_convallis = self.driver.find_element_by_xpath('//p/a[@href="http://example.com"]')
+        click_on_rutrum_convallis.click()
+
+        result = self.driver.find_element_by_xpath('//div[@class="single_tab_div resp-tab-content resp-tab-content-active"]')
+        assert result.is_displayed()
+
 
 
 
