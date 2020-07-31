@@ -1,5 +1,5 @@
 import unittest
-from datetime import time
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -104,21 +104,19 @@ class TestingFeatures(unittest.TestCase):
     #     assert result.is_displayed()
 
     def test_dialog_box_form(self):
-        click_on_dialog_box = self.driver.find_element_by_xpath('//li[@class="price_footer"]/a[@href="http://www.globalsqa.com/demo-site/dialog-boxes/"]')
+        click_on_dialog_box = self.driver.find_element_by_xpath('//a[@href="https://www.globalsqa.com/demo-site/dialog-boxes/"][text()="DialogBox"]')
         click_on_dialog_box.click()
 
-        # click_alert = Alert(driver=hh)
-        # click_alert.send_keys('hi')
-        # click_alert.accept()
-
         # wait_for = WebDriverWait(self.driver, 5).until(EC.((By.XPATH, '//div[@id="users-contain"]')))
-        wait_for = WebDriverWait(self.driver, 10).until(EC.frame_to_be_available_and_switch_to_it)
-     
+        wait_for = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//button[@id="create-user"][text()="Create new user"]')))
+        alert = self.driver.find_element_by_xpath('//div[@id="users-contain"]').click()
+        self.driver.switch_to.frame(alert)
+        Alert.accept(alert)
 
         click_on_create_new_user = self.driver.find_element_by_xpath('//button[@id="create-user"][text()="Create new user"]')
         click_on_create_new_user.click()
 
-        wait_for = WebDriverWait(self.driver, 5).until(EC.new_window_is_opened((By.XPATH, '//div[@id="dialog-form"]')))
+        # wait_for = WebDriverWait(self.driver, 5).until(EC.new_window_is_opened((By.XPATH, '//div[@id="dialog-form"]')))
 
         enter_name = self.driver.find_element_by_xpath('//input[@name="name"]')
         enter_name.clear()
@@ -140,18 +138,22 @@ class TestingFeatures(unittest.TestCase):
 
     # def test_message_box(self):
     #     click_on_dialog_box = self.driver.find_element_by_xpath(
-    #         '//li[@class="price_footer"]/a[@href="http://www.globalsqa.com/demo-site/dialog-boxes/"]')
+    #         '//a[@href="https://www.globalsqa.com/demo-site/dialog-boxes/"][text()="DialogBox"]')
     #     click_on_dialog_box.click()
     #
-    #     wait_for = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//li[@id="Message Box"]')))
+    #     wait_for = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, '//li[@id="Message Box"]')))
     #
     #     go_to_message_box = self.driver.find_element_by_xpath('//li[@id="Message Box"]')
     #     go_to_message_box.click()
     #
-    #     wait_for = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//button[@type="button"][text()="Ok"]')))
+    #     wait_for = WebDriverWait(self.driver, 5).until(EC.url_changes((By.LINK_TEXT, 'https://www.globalsqa.com/demo-site/dialog-boxes/#Message%20Box')))
+    #     wait_for = WebDriverWait(self.driver, 5).until(EC.alert_is_present())
+    #     alert = self.driver.find_element_by_xpath('//div[@id="post-2663"]').click()
+    #     self.driver.switch_to.frame(alert)
+    #     Alert.accept(alert)
     #
-    #     click_on_ok = self.driver.find_element_by_xpath('//button[@type="button"][text()="Ok"]')
-    #     click_on_ok.click()
+    #     # click_on_ok = self.driver.find_element_by_xpath('//div/div[@class="ui-dialog-buttonset"]/button[text()="Ok"]')
+    #     # click_on_ok.click()
     #
     #     click_on_rutrum_convallis = self.driver.find_element_by_xpath('//p/a[@href="http://example.com"]')
     #     click_on_rutrum_convallis.click()
